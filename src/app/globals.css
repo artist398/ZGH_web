@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --salon-gold: #d4af37;
-  --salon-gold-muted: #c9a85c;
-  --salon-red-glow: #c41e3a;
-  --background: #030102;
-  --foreground: #f7f2ea;
+  /* 主点缀：中国红（沿用 --salon-gold 变量名以减少组件改动） */
+  --salon-gold: #b91c1c;
+  --salon-gold-muted: #991b1b;
+  --salon-red-glow: #dc2626;
+  --background: #ffffff;
+  --foreground: #171717;
   --font-art-cn: "Ma Shan Zheng", "Noto Sans SC", serif;
   --font-display: "Playfair Display", "Cormorant Garamond", ui-serif, Georgia,
     serif;
@@ -37,7 +38,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.12);
+  -webkit-tap-highlight-color: rgba(185, 28, 28, 0.15);
 }
 
 .salon-hide-scrollbar {
@@ -53,6 +54,54 @@ body {
   font-family: var(--font-art-cn);
   font-weight: 400;
   letter-spacing: 0.02em;
+}
+
+.salon-hero-brand {
+  font-family: "ZCOOL QingKe HuangYou", var(--font-art-cn);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+/* Hero 导语：思源宋体粗体，偏东方书卷气 */
+.salon-hero-lead {
+  font-family: "Noto Serif SC", "Noto Sans SC", "Songti SC", "STSong", serif;
+  font-weight: 700;
+  font-feature-settings: "kern" 1;
+  letter-spacing: 0.04em;
+}
+
+/* 主标题：红 · 金 · 粉 渐变闪动（节奏偏慢） */
+.salon-hero-title-sparkle {
+  background: linear-gradient(
+    105deg,
+    #7f1d1d 0%,
+    #b91c1c 14%,
+    #dc2626 26%,
+    #f59e0b 36%,
+    #fbbf24 42%,
+    #fde047 48%,
+    #fbcfe8 56%,
+    #f472b6 62%,
+    #fda4af 68%,
+    #eab308 78%,
+    #b91c1c 88%,
+    #881337 100%
+  );
+  background-size: 300% 110%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: salon-sparkle-sweep 12s linear infinite;
+  filter: drop-shadow(0 2px 14px rgba(185, 28, 28, 0.38))
+    drop-shadow(0 0 28px rgba(234, 179, 8, 0.2))
+    drop-shadow(0 0 36px rgba(244, 114, 182, 0.18));
+}
+
+@keyframes salon-sparkle-sweep {
+  to {
+    background-position: 185% 50%;
+  }
 }
 
 .salon-display {
@@ -78,16 +127,16 @@ body {
 .salon-bg-grid {
   background-image: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.028) 1px,
+      rgba(0, 0, 0, 0.04) 1px,
       transparent 1px
     ),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at 50% 0%, black 0%, transparent 72%);
 }
 
 .salon-hero-vignette {
-  box-shadow: inset 0 0 160px 56px rgba(3, 1, 2, 0.72);
+  box-shadow: inset 0 0 120px 48px rgba(255, 255, 255, 0.5);
 }
 
 .salon-noise {
@@ -110,11 +159,11 @@ body {
 .salon-title-shine {
   background: linear-gradient(
     110deg,
-    #fff 0%,
-    #f5e6c8 28%,
-    #fff 48%,
-    #e8d5a3 62%,
-    #fff 100%
+    #7f1d1d 0%,
+    #b91c1c 28%,
+    #dc2626 48%,
+    #991b1b 62%,
+    #7f1d1d 100%
   );
   background-size: 220% auto;
   -webkit-background-clip: text;
@@ -138,7 +187,7 @@ body {
   width: 2.25rem;
   height: 2.25rem;
   pointer-events: none;
-  border-color: rgba(212, 175, 55, 0.45);
+  border-color: rgba(185, 28, 28, 0.45);
 }
 
 @media (min-width: 640px) {
@@ -176,41 +225,68 @@ body {
   border-right: 1px solid;
 }
 
+@media (max-width: 639px) {
+  /* 首屏主文案区：高定沙龙感 · 玻璃 + 内高光 + 轻红氛围线 */
+  .salon-hero-mobile-panel {
+    padding: 1.4rem 1.25rem 1.45rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    background: linear-gradient(
+      168deg,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.4) 48%,
+      rgba(254, 242, 242, 0.22) 100%
+    );
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.72) inset,
+      0 -1px 0 rgba(185, 28, 28, 0.05) inset,
+      0 36px 72px -40px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  }
+
+  .salon-hero-mobile-panel .salon-hero-frame-corner {
+    opacity: 0.5;
+  }
+}
+
 .salon-btn-gold {
+  color: #ffffff;
   background: linear-gradient(
     135deg,
-    #f2dc98 0%,
-    var(--salon-gold) 42%,
-    #9a7209 100%
+    #ef4444 0%,
+    var(--salon-red-glow) 45%,
+    #991b1b 100%
   );
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) inset,
-    0 4px 24px rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+    0 4px 20px rgba(185, 28, 28, 0.25);
 }
 
 .salon-btn-gold:hover {
   background: linear-gradient(
     135deg,
-    #f8e8b8 0%,
-    #e8c547 45%,
-    #a67c00 100%
+    #f87171 0%,
+    #ef4444 45%,
+    #b91c1c 100%
   );
 }
 
 .salon-lang-active {
+  color: #ffffff;
   background: linear-gradient(
     135deg,
-    #f0d78c 0%,
-    var(--salon-gold) 50%,
-    #c9a227 100%
+    #f87171 0%,
+    var(--salon-red-glow) 50%,
+    #b91c1c 100%
   );
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
 }
 
 .salon-header-line {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(212, 175, 55, 0.35),
+    rgba(185, 28, 28, 0.25),
     transparent
   );
 }
@@ -239,12 +315,12 @@ body {
 @keyframes salon-cta-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) inset,
-      0 4px 24px rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+      0 4px 24px rgba(185, 28, 28, 0.2);
   }
   50% {
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-      0 8px 40px rgba(212, 175, 55, 0.22);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28) inset,
+      0 8px 36px rgba(220, 38, 38, 0.28);
   }
 }
 
@@ -252,9 +328,22 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(212, 175, 55, 0.4),
+    rgba(185, 28, 28, 0.2),
     transparent
   );
+}
+
+.salon-service-card {
+  border-color: rgba(229, 229, 229, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: hover) {
+  .salon-service-card:hover {
+    border-color: rgba(185, 28, 28, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .salon-reveal {
@@ -277,9 +366,14 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .salon-kenburns,
   .salon-title-shine,
+  .salon-hero-title-sparkle,
   .salon-cta-pulse,
   .salon-gallery-sheen {
     animation: none !important;
+  }
+
+  .salon-hero-title-sparkle {
+    filter: none;
   }
 
   .salon-reveal {
@@ -291,8 +385,8 @@ body {
 }
 
 .salon-video-frame {
-  box-shadow: 0 0 100px -24px rgba(196, 30, 58, 0.38),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: 0 0 60px -20px rgba(185, 28, 28, 0.2),
+    0 0 0 1px rgba(0, 0, 0, 0.06) inset;
 }
 
 .salon-gallery-sheen {
@@ -318,9 +412,23 @@ body {
 .salon-footer-aurora {
   background: radial-gradient(
     ellipse 80% 100% at 50% 100%,
-    rgba(196, 30, 58, 0.09),
+    rgba(236, 72, 153, 0.09),
     transparent 55%
   );
+}
+
+/* 尾页联系方式区：与页脚统一的粉红阶（pink-50 → pink-200） */
+.salon-footer-contact-panel {
+  background: linear-gradient(
+    165deg,
+    #fdf2f8 0%,
+    #fce7f3 38%,
+    #fbcfe8 100%
+  );
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 16px 48px -30px rgba(219, 39, 119, 0.14);
 }
 
 details[open] summary ~ * {
@@ -340,7 +448,7 @@ details[open] summary ~ * {
 
 @media (max-width: 639px) {
   .salon-hero-vignette {
-    box-shadow: inset 0 0 100px 32px rgba(3, 1, 2, 0.8);
+    box-shadow: inset 0 0 80px 28px rgba(255, 255, 255, 0.55);
   }
 
   .salon-kenburns {

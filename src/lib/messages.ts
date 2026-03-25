@@ -41,7 +41,7 @@ export type BookingMessages = {
   mailSubject: string;
   mailIntro: string;
   submitMail: string;
-  submitWhatsapp: string;
+  submitTelegram: string;
   close: string;
   phoneInvalid: string;
   footerNote: string;
@@ -69,6 +69,8 @@ export type Messages = {
     kicker: string;
     title: string;
     lead: string;
+    /** 服务卡片角标，如「主营业务」 */
+    businessTag: string;
     items: ServiceItem[];
   };
   film: {
@@ -83,6 +85,11 @@ export type Messages = {
     lead: string;
     scrollHint: string;
     entranceTitle: string;
+    sectionInterior: string;
+    sectionHair: string;
+    sectionShampoo: string;
+    sectionMassage: string;
+    sectionCosmetic: string;
     shots: GalleryShot[];
   };
   booking: BookingMessages;
@@ -91,6 +98,7 @@ export type Messages = {
     bookCta: string;
     contactTitle: string;
     phoneLabel: string;
+    telegramLabel: string;
     addressLabel: string;
     /** 支持 \n 换行 */
     address: string;
@@ -134,6 +142,14 @@ const serviceItemsZh: ServiceItem[] = [
     title: "医美",
     desc: "在合规前提下，提供医学美容咨询与联合变美路径。",
   },
+  {
+    title: "纹身",
+    desc: "图案与线条设计、留色稳定，在严格消毒与卫生前提下完成刺青，并提供护理指导。",
+  },
+  {
+    title: "按摩",
+    desc: "肩颈背及全身舒缓放松，缓解疲劳、疏通经络，力度与节奏可按需调整。",
+  },
 ];
 
 const serviceItemsEn: ServiceItem[] = [
@@ -164,6 +180,14 @@ const serviceItemsEn: ServiceItem[] = [
   {
     title: "Aesthetic Medicine",
     desc: "Compliant consultations and curated pathways toward advanced rejuvenation.",
+  },
+  {
+    title: "Tattoo",
+    desc: "Custom linework and lasting saturation—strict hygiene, sterile setup, and clear aftercare.",
+  },
+  {
+    title: "Massage",
+    desc: "Neck, shoulders, back, and full-body relief—pressure and rhythm tailored to your comfort.",
   },
 ];
 
@@ -196,6 +220,14 @@ const serviceItemsKm: ServiceItem[] = [
     title: "សម្ផស្សវេជ្ជសាស្ត្រ",
     desc: "ពិគ្រោះតាមស្តង់ដារ និងផ្លូវរួមសម្រាប់ការរីកចម្រើនសម្ផស្ស។",
   },
+  {
+    title: "សាក់រូប",
+    desc: "រចនាបន្ទាត់ និងពណ៌រុងរឹង ក្រោមសុវត្ថិភាព និងអនាម័យ—មានការណែនាំថែរក្សាក្រោយសាក់។",
+  },
+  {
+    title: "ម៉ាស្សា",
+    desc: "សម្រាកក ស្មា ខ្នង និងរាងកាយ—បន្ថយអស់កម្លាំង ស្រទន់សាច់ដុំ កែតម្រូវរឹតនិងចង្វាក់តាមតម្រូវការ។",
+  },
 ];
 
 const galleryZh: GalleryShot[] = [
@@ -203,6 +235,8 @@ const galleryZh: GalleryShot[] = [
   { alt: "发廊内景一", caption: "剪染区 · 光影流动" },
   { alt: "发廊内景二", caption: "休憩 · 静谧氛围" },
   { alt: "发廊内景三", caption: "细节 · 材质与线条" },
+  { alt: "发廊内景四", caption: "通透空间 · 层次与景深" },
+  { alt: "发廊内景五", caption: "氛围光 · 舒适动线" },
 ];
 
 const galleryEn: GalleryShot[] = [
@@ -210,6 +244,8 @@ const galleryEn: GalleryShot[] = [
   { alt: "Interior I", caption: "Color atelier · light in motion" },
   { alt: "Interior II", caption: "Lounge · quiet atmosphere" },
   { alt: "Interior III", caption: "Detail · material and line" },
+  { alt: "Interior IV", caption: "Volume · depth and clarity" },
+  { alt: "Interior V", caption: "Ambient light · calm flow" },
 ];
 
 const galleryKm: GalleryShot[] = [
@@ -217,6 +253,8 @@ const galleryKm: GalleryShot[] = [
   { alt: "ខាងក្នុង ទី១", caption: "តំបន់ពណ៌ · ពន្លឺចល័ត" },
   { alt: "ខាងក្នុង ទី២", caption: "កន្លែងសម្រាក · ភាពស្ងប់" },
   { alt: "ខាងក្នុង ទី៣", caption: "លម្អិត · សម្ភារៈ និងបន្ទាត់" },
+  { alt: "ខាងក្នុង ទី៤", caption: "លំហ · ជម្រៅ និងភាពច្បាស់" },
+  { alt: "ខាងក្នុង ទី៥", caption: "ពន្លឺ · ចល័តភាពស្រួល" },
 ];
 
 export const messages: Record<Locale, Messages> = {
@@ -247,6 +285,7 @@ export const messages: Record<Locale, Messages> = {
       kicker: "Signature Menu",
       title: "全链路美丽服务",
       lead: "从头颅到指尖，从日常护理到进阶医美，我们以专业团队与精选产品，为您定制专属变美节奏。",
+      businessTag: "主营业务",
       items: serviceItemsZh,
     },
     film: {
@@ -261,11 +300,16 @@ export const messages: Record<Locale, Messages> = {
       lead: "从门面到内景，每一处陈设都服务于舒适与灵感——让等待也成为享受。",
       scrollHint: "左右滑动浏览内景 · 支持触控与箭头切换",
       entranceTitle: "入口实景",
+      sectionInterior: "空间内景",
+      sectionHair: "美发造型",
+      sectionShampoo: "洗护护理",
+      sectionMassage: "头疗与按摩",
+      sectionCosmetic: "医美空间",
       shots: galleryZh,
     },
     booking: {
       title: "在线预约",
-      subtitle: "填写信息后可通过邮件或 WhatsApp 发送给我们，亦可直接致电门店。",
+      subtitle: "填写信息后可通过邮件或 Telegram 发送给我们，亦可直接致电门店。",
       nameLabel: "称呼",
       namePlaceholder: "如何称呼您",
       phoneLabel: "手机号码",
@@ -279,11 +323,11 @@ export const messages: Record<Locale, Messages> = {
       mailSubject: "中国红美丽汇 · 官网预约咨询",
       mailIntro: "【官网预约】",
       submitMail: "邮件发送预约",
-      submitWhatsapp: "用 WhatsApp 发送",
+      submitTelegram: "用 Telegram 发送",
       close: "关闭",
       phoneInvalid: "请填写至少 6 位有效号码，便于我们联系您。",
       footerNote:
-        "点击「邮件发送」将打开系统邮箱；若设备未配置邮箱，请使用电话或 WhatsApp。",
+        "点击「邮件发送」将打开系统邮箱；若设备未配置邮箱，请使用电话或 Telegram。",
       dial: "致电",
     },
     footer: {
@@ -292,9 +336,9 @@ export const messages: Record<Locale, Messages> = {
       bookCta: "打开预约表",
       contactTitle: "联系方式",
       phoneLabel: "联系电话",
+      telegramLabel: "Telegram",
       addressLabel: "门店地址",
-      address:
-        "柬埔寨金边（请替换为详细街区、门牌号及楼层）\n中国红 · 美丽汇",
+      address: "金边市 钻石天空正对门\n中国红 · 美丽汇",
       openMaps: "在地图中打开",
       quickLinks: "快速链接",
       visitTips: "到店提示",
@@ -332,6 +376,7 @@ export const messages: Record<Locale, Messages> = {
       kicker: "Signature Menu",
       title: "A complete beauty spectrum",
       lead: "From crown to fingertips, from daily care to advanced aesthetics—our team choreographs your personal rhythm of renewal.",
+      businessTag: "Core menu",
       items: serviceItemsEn,
     },
     film: {
@@ -346,12 +391,17 @@ export const messages: Record<Locale, Messages> = {
       lead: "From façade to lounge, every detail is composed for comfort and inspiration—even the wait becomes a moment.",
       scrollHint: "Swipe to explore interiors · arrows on desktop",
       entranceTitle: "Entrance",
+      sectionInterior: "Interiors",
+      sectionHair: "Hair & styling",
+      sectionShampoo: "Wash & care",
+      sectionMassage: "Head spa & massage",
+      sectionCosmetic: "Aesthetic zone",
       shots: galleryEn,
     },
     booking: {
       title: "Book an appointment",
       subtitle:
-        "Send your request by email or WhatsApp, or call us directly. Fields marked with * are required for follow-up.",
+        "Send your request by email or Telegram, or call us directly. Fields marked with * are required for follow-up.",
       nameLabel: "Name",
       namePlaceholder: "How should we address you",
       phoneLabel: "Phone",
@@ -365,11 +415,11 @@ export const messages: Record<Locale, Messages> = {
       mailSubject: "China Red Beauty Hub · Booking request",
       mailIntro: "[Website booking]",
       submitMail: "Send via email",
-      submitWhatsapp: "Send via WhatsApp",
+      submitTelegram: "Send via Telegram",
       close: "Close",
       phoneInvalid: "Please enter at least 6 digits so we can reach you.",
       footerNote:
-        "Email opens your mail client. If it does not open, call or WhatsApp us with the same details.",
+        "Email opens your mail client. If it does not open, call or message us on Telegram with the same details.",
       dial: "Call",
     },
     footer: {
@@ -378,6 +428,7 @@ export const messages: Record<Locale, Messages> = {
       bookCta: "Open booking form",
       contactTitle: "Contact",
       phoneLabel: "Phone",
+      telegramLabel: "Telegram",
       addressLabel: "Address",
       address:
         "Phnom Penh, Cambodia\n(Replace with street, building, and floor)\nChina Red · Beauty Hub",
@@ -418,6 +469,7 @@ export const messages: Record<Locale, Messages> = {
       kicker: "ម៉ឺនុយពិសេស",
       title: "សេវាសម្ផស្សគ្រប់ជួរ",
       lead: "ពីក្បាលដល់ចុយដៃ ពីការថែទាំប្រចាំថ្ងៃដល់សម្ផស្សវេជ្ជសាស្ត្រ—ក្រុមរបស់យើងរៀបចំចង្វាក់ភាពស្រស់ស្អាតរបស់អ្នក។",
+      businessTag: "សេវាសំខាន់",
       items: serviceItemsKm,
     },
     film: {
@@ -432,12 +484,17 @@ export const messages: Record<Locale, Messages> = {
       lead: "ពីផ្ទៃខាងមុខដល់កន្លែងសម្រាក រាល់រចនាប័ទ្មសម្រាប់ភាពស្រួល និងការបំផុសគំនិត—រង់ចាំក៏ជាការរីករាយ។",
       scrollHint: "អូសដើម្បីមើលខាងក្នុង · ប៊ូតុងលើកុំព្យូទ័រ",
       entranceTitle: "ទ្វារចូល",
+      sectionInterior: "ខាងក្នុង",
+      sectionHair: "កាត់ និងរចនាសក់",
+      sectionShampoo: "ការលាង និងថែទាំ",
+      sectionMassage: "ថែរក្សាក្បាល និងម៉ាស្សា",
+      sectionCosmetic: "សម្ផស្សវេជ្ជសាស្ត្រ",
       shots: galleryKm,
     },
     booking: {
       title: "កក់ណាត់ជួប",
       subtitle:
-        "បំពេញព័ត៌មានហើយផ្ញើតាមអ៊ីមែល ឬ WhatsApp ឬទូរស័ព្ទមកយើងដោយផ្ទាល់។",
+        "បំពេញព័ត៌មានហើយផ្ញើតាមអ៊ីមែល ឬ Telegram ឬទូរស័ព្ទមកយើងដោយផ្ទាល់។",
       nameLabel: "ឈ្មោះ",
       namePlaceholder: "ឈ្មោះរបស់អ្នក",
       phoneLabel: "លេខទូរស័ព្ទ",
@@ -451,11 +508,11 @@ export const messages: Record<Locale, Messages> = {
       mailSubject: "ចិនក្រហម · សំណើកក់ណាត់",
       mailIntro: "[ការកក់ពីគេហទំព័រ]",
       submitMail: "ផ្ញើតាមអ៊ីមែល",
-      submitWhatsapp: "ផ្ញើតាម WhatsApp",
+      submitTelegram: "ផ្ញើតាម Telegram",
       close: "បិទ",
       phoneInvalid: "សូមបញ្ចូលលេខយ៉ាងតិច ៦ ខ្ទង់។",
       footerNote:
-        "អ៊ីមែលនឹងបើកកម្មវិធីសំបុត្រ។ បើមិនបើក សូមទូរស័ព្ទ ឬ WhatsApp។",
+        "អ៊ីមែលនឹងបើកកម្មវិធីសំបុត្រ។ បើមិនបើក សូមទូរស័ព្ទ ឬ Telegram។",
       dial: "ហៅទូរស័ព្ទ",
     },
     footer: {
@@ -464,6 +521,7 @@ export const messages: Record<Locale, Messages> = {
       bookCta: "បើកបែបបទកក់",
       contactTitle: "ទំនាក់ទំនង",
       phoneLabel: "លេខទូរស័ព្ទ",
+      telegramLabel: "Telegram",
       addressLabel: "អាសយដ្ឋានហាង",
       address:
         "ភ្នំពេញ កម្ពុជា\n(សូមដាក់ផ្លូវ អាគារ និងជាន់)\nចិនក្រហម · មជ្ឈមណ្ឌលសម្ផស្ស",

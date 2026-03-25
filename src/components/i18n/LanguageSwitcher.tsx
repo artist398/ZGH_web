@@ -8,7 +8,7 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="flex max-w-[min(100%,11.5rem)] shrink-0 items-center rounded-full border border-white/10 bg-black/30 p-0.5 shadow-inner shadow-black/40 backdrop-blur-md sm:max-w-none"
+      className="flex max-w-[min(100%,11.5rem)] shrink-0 items-center rounded-full border border-neutral-200 bg-neutral-100 p-0.5 shadow-inner sm:max-w-none"
       role="group"
       aria-label="Language"
     >
@@ -21,8 +21,8 @@ export function LanguageSwitcher() {
             onClick={() => setLocale(code)}
             className={`min-h-9 min-w-9 touch-manipulation rounded-full px-2 py-1.5 text-[10px] font-medium transition-all duration-300 sm:min-h-0 sm:min-w-0 sm:px-3 sm:py-1.5 sm:text-xs ${
               active
-                ? "salon-lang-active text-[#1a0508] shadow-md"
-                : "text-white/55 active:text-white hover:text-white/90"
+                ? "salon-lang-active text-white shadow-md"
+                : "text-neutral-600 hover:text-neutral-900"
             }`}
           >
             <span className="sm:hidden">{localeLabelsCompact[code]}</span>

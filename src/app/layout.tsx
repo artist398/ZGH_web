@@ -6,7 +6,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#030102",
+  themeColor: "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   description:
     "中国红 美丽汇 — 美容美发、头疗、美甲、美瞳、接发、护肤、医美。艺术化空间与专业团队，定制您的美丽方案。",
   icons: {
-    icon: "/zgh_logo.jpeg",
-    apple: "/zgh_logo.jpeg",
+    icon: "/images/zgh_logo.jpeg",
+    apple: "/images/zgh_logo.jpeg",
   },
 };
 
@@ -41,7 +41,7 @@ export default function RootLayout({
         {/* Ma Shan Zheng / Playfair / Noto SC+Khmer — 全站艺术字与多语文本 */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Ma+Shan+Zheng&family=Noto+Sans+Khmer:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Ma+Shan+Zheng&family=Noto+Sans+Khmer:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=ZCOOL+QingKe+HuangYou&display=swap"
           rel="stylesheet"
         />
       </head>
